@@ -120,6 +120,14 @@ button {
   padding: 0rem 0.5rem;
 }
 
+.success {
+  width: 100%;
+  font-size: 14px;
+  color: green;
+  text-align: left;
+  padding: 0rem 0.5rem;
+}
+
 .main {
   position: relative;
   width: 100%;

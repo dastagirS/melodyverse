@@ -6,7 +6,6 @@ import { nameRegex, passwordRegex } from "../utils/regex";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { verifyJwtToken } from "@/server/middleware/auth";
 
 export default function Signup() {
   const router = useRouter();
@@ -45,6 +44,8 @@ export default function Signup() {
     formState: { errors },
   } = useForm<userInputs>({ resolver: zodResolver(userSchema) });
 
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   async function signUpUser(data: userInputs) {
     const formdata = new FormData();
     formdata.append("username", data.name);
@@ -56,9 +57,11 @@ export default function Signup() {
         body: formdata,
       });
       const res = await req.json();
-     // router.push("/");
-    } catch (err) {
+      setSuccess("signup successfull");
+      router.push("/");
+    } catch (err: any) {
       console.log(err);
+      setError(err);
     }
   }
 
@@ -140,7 +143,8 @@ export default function Signup() {
           {errors.confirmPassword && (
             <p className="error">{errors.confirmPassword.message}</p>
           )}
-
+          <p className="error">{error}</p>
+          <p className="success">{success}</p>
           <button type="submit" className="signup-btn">
             Signup
           </button>

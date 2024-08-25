@@ -34,12 +34,12 @@ export async function login(c: Context) {
       },
     );
 
-    c.set("jwtToken", token)
+    c.set("jwtToken", token);
 
     setCookie(c, "refreshToken", refreshToken, {
-      secure: true, 
+      secure: true,
       httpOnly: true,
-      sameSite: "strict", 
+      sameSite: "strict",
       maxAge: 7 * 24 * 60 * 60 * 1000, // Setting the expiration time (7 days)
     });
 
@@ -51,6 +51,10 @@ export async function login(c: Context) {
 
     return c.json(result, 200);
   } catch (err) {
-    return c.json(`Auth Failed: ${err}`, 500);
+    const result = {
+      authSuccess: "false",
+      error: err,
+    };
+    return c.json(result, 501);
   }
 }

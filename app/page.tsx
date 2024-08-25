@@ -41,6 +41,8 @@ export default function Home() {
   //error state for error upcoming from api
   const [error, setError] = useState("");
 
+  const [success, setSuccess]  = useState("")
+
   //login function
   async function loginUser(data: userInputs) {
     const formdata = new FormData();
@@ -52,9 +54,10 @@ export default function Home() {
         body: formdata,
       });
       const res: response = await req.json();
+      setSuccess("user logged in")
       router.push("/userProfile")
-    } catch (err) {
-      console.log(err);
+    } catch (err :any) {
+      setError(err)
     }
   }
 
@@ -109,6 +112,7 @@ export default function Home() {
             <p className="error">{errors.password.message}</p>
           )}
           <p className="error">{error}</p>
+            <p className="success">{success}</p>
           <button type="submit" className="login-btn">
             Login
           </button>

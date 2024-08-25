@@ -12,8 +12,7 @@ export async function signUp(c: Context) {
     // checks before hand if the user already exist in the db
     let getUserEmail = await User.findOne({ email });
 
-    if (getUserEmail)
-      return c.json("Signup failed: user already exist", 400);
+    if (getUserEmail) return c.json("Signup failed: user already exist", 400);
 
     //hasing the password using bcrypt
     let encryptPassword = await bcrypt.hash(password, 10); // 10 here is the bcrypt salt rounds
@@ -30,8 +29,8 @@ export async function signUp(c: Context) {
       { expiresIn: "1h" },
     );
 
-  const refreshToken = jwt.sign(
-      {username: username,  id: newUser._id },
+    const refreshToken = jwt.sign(
+      { username: username, id: newUser._id },
       process.env.JWT_SECRET,
       {
         expiresIn: "7d",
@@ -44,6 +43,10 @@ export async function signUp(c: Context) {
     };
     return c.json(result, 201);
   } catch (err) {
-    return c.json(`Signup failed: ${err}`, 501);
+    const result = {
+      authSuccess: "false",
+      error: err,
+    };
+    return c.json(result, 501);
   }
 }
