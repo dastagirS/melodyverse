@@ -1,0 +1,33 @@
+{
+  "name": "melodyverse",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@hono/node-server": "^1.12.1",
+    "@hookform/resolvers": "^3.9.0",
+    "bcrypt": "^5.1.1",
+    "gsap": "^3.12.5",
+    "hono": "^4.5.8",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.5.3",
+    "next": "14.2.6",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hook-form": "^7.52.2",
+    "swiper": "^11.1.10",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "typescript": "^5"
+  }
+}
